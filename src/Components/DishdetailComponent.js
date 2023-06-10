@@ -1,26 +1,50 @@
-import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
+import React from 'react';
+import {
+    Card, CardImg, CardBody,
+    CardTitle
+} from 'reactstrap';
 
-class DishDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        if (this.props.dish) {
-
-            return (
-                <Card>
-                    <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{this.props.dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Card>
-            )
-        } else {
-            return (<div></div>)
-        }
-    }
+function RenderDish({ dish }) {
+    return (
+        <Card>
+            <CardImg width="100%" src={dish.image} alt={dish.name} />
+            <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+            </CardBody>
+        </Card>
+    )
 }
 
-export default DishDetail
+function RenderComments({ comments }) {
+    return (
+        <div>
+            <h4>Comments</h4>
+            {comments.map((comment) => (
+                <div key={comment.id}>
+                    <p>{comment.text}</p>
+                    <p>
+                        -- {comment.author}, {new Date(comment.date).toLocaleDateString()}
+                    </p>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+const DishDetail = (props) => {
+    const { dish } = props
+    console.log(dish)
+    return (
+        <>
+            {dish ? (
+                <>
+                    <RenderDish dish={dish} />
+                    <RenderComments comments={dish.comments} />
+                </>
+            ) : <></>}
+
+        </>
+    )
+}
+
+export default DishDetail;
