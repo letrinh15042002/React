@@ -1,17 +1,21 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 import Main from './Components/MainComponent';
+// import Example from './Components/Example';
+import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
 
-      <div>
-        <Main />
+      <BrowserRouter>
+        <div className="App">
+          <Main />
+        </div>
+      </BrowserRouter>
 
-      </div>
     );
   }
 }
